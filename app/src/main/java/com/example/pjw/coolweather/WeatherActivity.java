@@ -1,5 +1,6 @@
 package com.example.pjw.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -192,6 +193,13 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        if (weather!=null&&"ok".equals(weather.status)){
+            weatherLayout.setVisibility(View.VISIBLE);
+            Intent intent=new Intent(this,AutoUpdateService.class);
+
+        }else {
+            Toast.makeText(WeatherActivity.this,"获取天气信息失败",Toast.LENGTH_SHORT).show();
+        }
     }
     private void loadBingPic(){
         String requestBingPic = "http://guolin.tech/api/bing_pic";
